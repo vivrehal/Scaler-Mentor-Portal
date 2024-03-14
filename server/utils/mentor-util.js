@@ -2,30 +2,19 @@ import Mentor from "../models/mentor-model.js";
 import studentUtil from "./student-util.js";
 
 
-const findMentor=async(filter)=>{
-    // Find the mentor with filter in database
-    const mentor = await Mentor.findOne(filter);
-    return mentor;
-}
-
 const createMentor=async(data)=>{
-    // Create a mentor in database with the data
     const mentor = await Mentor.create(data);
     return mentor;
 }
 
-
-
 const addStudent=async(data)=>{
     
-    // Find mentor with the id
     const mentor = await Mentor.findOne({ _id: data.mentorId });
     const numberOfStudents = mentor.studentIds.length;
     if(numberOfStudents >= 4){
         return { message: "Can't add more than 4 students" };
     }
     try{
-        // update the mentor 
         await Mentor.updateOne({ _id: mentor._id }, {
             $push: { studentIds: data.studentId }
         })
@@ -35,7 +24,7 @@ const addStudent=async(data)=>{
     }
     const status = true;
     const id = data.studentId;
-    // set the status of the student
+
     studentUtil.setStatus({ id, status });
     return mentor;
 }
@@ -43,20 +32,18 @@ const addStudent=async(data)=>{
 const removeStudent=async(data)=>{
     
     const mentor = await Mentor.findOne({ _id: data.mentorId });
-    // const numberOfStudents = mentor.studentIds.length;
     try{
-        // update mentor
+        // console.log(mentor);
         await Mentor.updateOne({ _id: mentor._id }, {
             $pull: { studentIds: data.studentId }
         })
     }catch(err){
         console.log(err);
-        updated = false;
         return mentor;
     }
     const status = false;
     const id = data.studentId;
-    // update student
+
     studentUtil.setStatus({ id, status});
     return mentor;
 }
@@ -103,7 +90,6 @@ const getMyStudents=async(id)=>{
 
 
 const mentorUtil = {
-    findMentor,
     createMentor,
     addStudent,
     removeStudent,
@@ -111,4 +97,5 @@ const mentorUtil = {
     mentors,
     getMyStudents
 }
+
 export default mentorUtil;

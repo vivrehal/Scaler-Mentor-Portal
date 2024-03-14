@@ -1,37 +1,25 @@
-import dotenv from 'dotenv';
-dotenv.config();   
-
-// call the express library
 import express from 'express';
+import router from './routes.js';
+import DbConnection from './database.js';   
+import dotenv from 'dotenv';
+import cors from 'cors';
+
 const app = express();
 
-// get the port to run the server on
-const PORT = process.env.PORT || 5000;
-
-// register all the routes
-import router from './routes.js';
-
-import cors from 'cors';
+app.use(express.json());
+app.use(router);
 
 const corsOption = {
     origin: process.env.CORS_ORIGIN,
     credentials: true,
 }
 
+dotenv.config();   
 app.use(cors(corsOption));
 
-// Database Connection
-import DbConnection from './database.js';   
-import marksheet from './templates/marksheet.js';
-DbConnection();
+const PORT = process.env.PORT || 5000;
 
-// Using methods
-app.use(express.json());
-app.use(router);
-
-
-
-// Listening requests on server
 app.listen(PORT, ()=>{
-    console.log(`Listening on port ${PORT}`);
+    DbConnection();
+    console.log(`Listening on port ${process.env.PORT || 5000}`);
 })

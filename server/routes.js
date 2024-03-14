@@ -16,13 +16,11 @@ import {
 
 } from './controllers/student-controller.js';
 
-// home route
 router.get('/', (req, res)=> {
-    res.send("Hello from server");
+    res.send("This is Mentor-P server side");
 })
 
 // get routes
-
 router.get('/mentors', getMentors);
 router.get('/students', getStudents);
 router.post('/mystudents', getMyStudents)

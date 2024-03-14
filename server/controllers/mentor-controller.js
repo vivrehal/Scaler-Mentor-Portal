@@ -7,19 +7,13 @@ import crypto from 'crypto';
 
     const createMentor=async(req, res)=>{
         
-        // Get data from the frontend
         const { mentorId, mentorName, studentIds } = req.body;
 
-        // If mentor ID or mentor Name is not present, send a message to require all data
         if(!mentorId || !mentorName){
             res.status(404).send("All fields are required");
         }
 
-        // create a mentor
         let mentor;
-
-        // check if the mentor is already present, then return mentor.
-        // Else create new mentor in database and return it.
         try{
             mentor = await mentorUtil.findMentor({mentorId});
             if(!mentor){
@@ -30,25 +24,20 @@ import crypto from 'crypto';
             res.status(500).json({message: "DB error"});
         }
 
-        // return status 200 if everything is ok.
         res.status(200).send(mentor);
     }
 
     const addStudent=async(req, res)=>{
         
-        // destructure the data from the body
         const { studentId, mentorId } = req.body;
 
-        // if data is missing, send the message
         if(!studentId || !mentorId){
             res.status(404).send("ID is missing");
         }
 
-        // create mentor variable
         let mentor;
         try{
             
-            // call the addStudent method from the mentor-service file
             mentor = await mentorUtil.addStudent({studentId, mentorId});
 
             if(!mentor){
@@ -74,28 +63,34 @@ import crypto from 'crypto';
 
         let mentor, student;
         try{
-
-            // call the removeStudent method from the mentor-service'
             student= await studentUtil.update({ideation:0, execution:0, viva:0, presentation:0, remarks:"No remarks", studentId})
             // console.log(student);
             mentor = await mentorUtil.removeStudent({studentId, mentorId});
 
         }catch(err){
             console.log(err);
-            res.status(500).json({message: "DB error"});
+            return res.status(500).json({message: "DB error"});
         }
 
         res.status(200).send(mentor);
     }
 
     const submit=async(req, res)=>{
+
+        // get the mentor id from the body
+        // check >=3 <=4 students
+        // console.log(req.body);
+        // get array of students
+        // set student flag true 
+        // set mentor flag true
+        // send emails to students
+
         const { mentorId } = req.body;
         
         let updatedStudents;
         
         try{
 
-            // call the submit function from the mentor-service file
             updatedStudents = await mentorUtil.submit(mentorId);
             if(updatedStudents.message){
                 return res.status(410).json(updatedStudents.message);
