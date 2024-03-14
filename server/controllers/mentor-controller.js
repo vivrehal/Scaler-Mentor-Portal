@@ -1,9 +1,5 @@
 import mentorUtil  from '../utils/mentor-util.js';
 import studentUtil from '../utils/student-util.js';
-import { jsPDF } from "jspdf"; // will automatically load the node version
-import path from'path';
-import crypto from 'crypto';
-
 
     const createMentor=async(req, res)=>{
         
