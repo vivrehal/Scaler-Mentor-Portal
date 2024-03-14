@@ -4,18 +4,21 @@ import DbConnection from './database.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-const app = express();
+dotenv.config();  
 
-app.use(express.json());
-app.use(router);
+const app = express();
 
 const corsOption = {
     origin: process.env.CORS_ORIGIN,
     credentials: true,
 }
 
-dotenv.config();   
 app.use(cors(corsOption));
+
+app.use(express.json());
+app.use(router);
+
+
 
 const PORT = process.env.PORT || 5000;
 
