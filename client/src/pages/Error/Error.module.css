@@ -1,0 +1,16 @@
+.text{
+    color: white;
+    font-size: 200%;
+    text-align: center;
+    margin: 10% 0%;
+    text-transform: uppercase;
+}
+
+.wrapper{
+    width: 100%;
+    background: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
