@@ -59,7 +59,7 @@ import studentUtil from '../utils/student-util.js';
 
         let mentor, student;
         try{
-            student= await studentUtil.update({ideation:0, execution:0, viva:0, presentation:0, remarks:"No remarks", studentId})
+            student= await studentUtil.update({Ideation:0, Execution:0, Viva:0, Presentation:0, Remarks:"No remarks", studentId})
             // console.log(student);
             mentor = await mentorUtil.removeStudent({studentId, mentorId});
 
@@ -114,7 +114,7 @@ import studentUtil from '../utils/student-util.js';
 
     const getMyStudents=async(req, res)=>{
         const { id } = req.body;
-        console.log(id)
+        // console.log(id)
         const allStudents = await mentorUtil.getMyStudents(id)
         res.status(200).send(allStudents);
     }

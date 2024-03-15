@@ -52,7 +52,6 @@ const removeStudent=async(data)=>{
 
 const submit=async(id)=>{
     
-    // update mentor
     const mentor = await Mentor.findOne({_id: id});
     const students = mentor.studentIds;
     if(students.length < 3){

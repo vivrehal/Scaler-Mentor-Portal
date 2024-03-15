@@ -26,12 +26,11 @@ import studentUtil from '../utils/student-util.js';
 
     const updateMarks=async(req, res)=>{
 
-        const { studentId, ideation, execution, viva, presentation, remarks } = req.body;
-
-        console.log(req.body);
+        // console.log(req.body);
         let student;
         try{
-            student = await studentUtil.update({ studentId, ideation, execution, viva, presentation, remarks }); 
+            student = await studentUtil.update({ ...req.body }); 
+            // console.log(student);
 
         }catch(err){
             console.log(err);
@@ -54,5 +53,18 @@ import studentUtil from '../utils/student-util.js';
         res.status(200).send(students);
     }
 
+    const setAllStudentsStatus=async(req, res)=>{
+        const { status } = req.body;
+        // console.log(status)
+        let students;
+        try{
+            students = await studentUtil.setSubmitStatus(status);
+        }catch(err){
+            console.log(err);
+            res.status(500).json({message: "DB error"});
+        }
+        res.status(200).send(students);
+    }
 
-export { createStudent, updateMarks, getStudents}
+
+export { createStudent, updateMarks, getStudents, setAllStudentsStatus}

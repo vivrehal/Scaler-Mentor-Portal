@@ -13,6 +13,7 @@ import {
     getStudents,
     updateMarks,
     createStudent,
+    setAllStudentsStatus,
 
 } from './controllers/student-controller.js';
 
@@ -32,5 +33,6 @@ router.post('/api/add-student', addStudent);
 router.post('/api/remove-student', removeStudent);
 router.post('/api/submit', submit);
 router.post('/api/update', updateMarks);
+router.post('/api/set-submit-status', setAllStudentsStatus);
 
 export default router;

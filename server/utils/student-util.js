@@ -15,6 +15,18 @@ const setStatus=async(data)=>{
     }
 }
 
+const setSubmitStatus=async(status)=>{
+    const students = await Student.find();
+    for(let i=0; i<students.length; i++){
+        try{
+            await Student.updateOne({ _id: students[i]._id }, { Submitted: status });
+            const student = await Student.findOne( { _id: students[i]._id })
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
+
 const submit=async(data)=>{
     const students = data;
     let updatedStudents = [];
@@ -49,11 +61,11 @@ const submit=async(data)=>{
 
 const update=async(data)=>{
     const id = data.studentId;
-    const Ideation = data.ideation;
-    const Execution = data.execution;
-    const Viva = data.viva;
-    const Presentation = data.presentation;
-    const Remarks = data.remarks;
+    const Ideation = data.Ideation;
+    const Execution = data.Execution;
+    const Viva = data.Viva;
+    const Presentation = data.Presentation;
+    const Remarks = data.Remarks;
 
     let student;
     try{
@@ -87,6 +99,6 @@ const getStudents=async(ids)=>{
     return allStudents;
 }
 
-const studentUtil = { createStudent, setStatus, submit, update, students, getStudents}
+const studentUtil = { createStudent, setStatus, submit, update, students, getStudents, setSubmitStatus}
 
 export default studentUtil;
