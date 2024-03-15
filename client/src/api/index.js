@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // api creation
 const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://mentorportal.onrender.com',
     headers: {
         'Content-type': 'application/json',
         Accept: 'application/json'
