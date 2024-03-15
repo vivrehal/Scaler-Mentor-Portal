@@ -16,6 +16,7 @@ const NavBar = () => {
   
   useEffect(() => {
       if(!id){
+        alert('Please login first');
         navigate('/')
       }
       setMentorId(id)

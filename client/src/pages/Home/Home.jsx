@@ -7,7 +7,6 @@ import { setLoading } from '../../Store/loadingSlice';
 
 const Home = () => {
 
-    // Get Mentors
     const [mentors, setMentors] = useState([]);
     
     const dispatch = useDispatch();
