@@ -29,7 +29,7 @@ const NavBar = () => {
         </div>
         <div className={styles.links}>
             <Link className={styles.link} to='/'>Mentors</Link>
-            {mentorId && <Link className={styles.link} to='/students'>Students</Link>}
+            {mentorId && <Link className={styles.link} to='/students'> All Students</Link>}
             {mentorId && <Link className={styles.link} to='/mystudents'>My Students</Link>}
         </div>
     </div>
